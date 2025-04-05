@@ -5,6 +5,8 @@ import Dashboard from "./pages/Dashboard";
 import Layout from "./components/Layout";
 import PrivateRoute from "./components/PrivateRoute";
 import { Toaster } from 'react-hot-toast';
+import Profile from "./pages/Profile.jsx";
+import EditProfile from "./pages/EditProfile.jsx";
 
 function App() {
     return (
@@ -32,6 +34,9 @@ function App() {
                         </Layout>
                     }
                 />
+
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/edit-profile" element={<EditProfile/>} />
             </Routes>
             <Toaster position="top-right" />
         </Router>

@@ -24,6 +24,7 @@ export default function Register() {
         if (res) navigate("/login");
     };
 
+
     return (
         <div className="flex items-center justify-center h-screen bg-green-100">
             <form

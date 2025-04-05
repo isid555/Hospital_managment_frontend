@@ -12,57 +12,64 @@ export default function Dashboard() {
         getPendingNurses,
         approveDoctor,
         rejectDoctor,
+        approveNurse,
+        rejectNurse,
         getApprovedDoctors,
         getApprovedNurses
     } = useAdminActions();
 
     const [pendingDoctors, setPendingDoctors] = useState([]);
-    const [pendingNurseCount, setPendingNurseCount] = useState(0);
-    const [totalDoctors,settotalDoctors] = useState(0);
-    const [totalNurses , settotalNurses] = useState(0);
-
+    const [pendingNurses, setPendingNurses] = useState([]);
+    const [totalDoctors, setTotalDoctors] = useState(0);
+    const [totalNurses, setTotalNurses] = useState(0);
 
     useEffect(() => {
         const fetchPendingCounts = async () => {
             const doctorsRes = await getPendingDoctors();
             const nursesRes = await getPendingNurses();
-
             const totDoctors = await getApprovedDoctors();
-            const totNurses  = await getApprovedNurses()
+            const totNurses = await getApprovedNurses();
 
             if (doctorsRes?.data) setPendingDoctors(doctorsRes.data);
-            if (nursesRes?.data) setPendingNurseCount(nursesRes.data.length);
-
-            if (totDoctors?.data) settotalDoctors(doctorsRes.data.length);
-            if (totNurses?.data) settotalNurses(nursesRes.data.length);
+            if (nursesRes?.data) setPendingNurses(nursesRes.data);
+            if (totDoctors?.data) setTotalDoctors(totDoctors.data.length);
+            if (totNurses?.data) setTotalNurses(totNurses.data.length);
         };
 
         if (isAdmin) fetchPendingCounts();
     }, [isAdmin]);
 
     const handleApproval = async (id, action) => {
-        let success = false;
+        let res = null;
+
         if (action === "approve") {
-            const res = await approveDoctor(id);
+            res = await approveDoctor(id);
             if (res?.success) {
                 setPendingDoctors(prev => prev.filter(doc => doc._id !== id));
+                toast.success("Doctor approved");
             }
         } else if (action === "reject") {
-            const res = await rejectDoctor(id);
+            res = await rejectDoctor(id);
             if (res?.success) {
                 setPendingDoctors(prev => prev.filter(doc => doc._id !== id));
+                toast.success("Doctor rejected");
             }
-        }
-
-        if (success) {
-            setPendingDoctors(prev => {
-                const updatedList = prev.filter(doc => doc._id !== id);
-                return updatedList;
-            });
+        } else if (action === "approve-nurse") {
+            res = await approveNurse(id);
+            if (res?.success) {
+                setPendingNurses(prev => prev.filter(nurse => nurse._id !== id));
+                toast.success("Nurse approved");
+            }
+        } else if (action === "reject-nurse") {
+            res = await rejectNurse(id);
+            if (res?.success) {
+                setPendingNurses(prev => prev.filter(nurse => nurse._id !== id));
+                toast.success("Nurse rejected");
+            }
         }
     };
 
-    const totalPending = pendingDoctors.length + pendingNurseCount;
+    const totalPending = pendingDoctors.length + pendingNurses.length;
 
     return (
         <div className="p-6 bg-gray-50 min-h-screen">
@@ -107,6 +114,42 @@ export default function Dashboard() {
                                             <button
                                                 className="bg-red-500 hover:bg-red-600 text-white px-4 py-1 rounded"
                                                 onClick={() => handleApproval(doc._id, "reject")}
+                                                disabled={loading}
+                                            >
+                                                Reject
+                                            </button>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+
+                    {/* 🔽 Pending Nurses List */}
+                    <div className="mt-8">
+                        <h3 className="text-lg font-bold mb-3 text-gray-800">Pending Nurses</h3>
+                        {pendingNurses.length === 0 ? (
+                            <p className="text-gray-500">No pending nurses.</p>
+                        ) : (
+                            <div className="space-y-4">
+                                {pendingNurses.map(nurse => (
+                                    <div key={nurse._id} className="bg-white shadow p-4 rounded-lg flex justify-between items-center">
+                                        <div>
+                                            <h4 className="text-md font-semibold">{nurse.name}</h4>
+                                            <p className="text-sm text-gray-500">{nurse.email}</p>
+                                            <p className="text-sm text-gray-400">Phone: {nurse.phone}</p>
+                                        </div>
+                                        <div className="space-x-2">
+                                            <button
+                                                className="bg-green-500 hover:bg-green-600 text-white px-4 py-1 rounded"
+                                                onClick={() => handleApproval(nurse._id, "approve-nurse")}
+                                                disabled={loading}
+                                            >
+                                                Approve
+                                            </button>
+                                            <button
+                                                className="bg-red-500 hover:bg-red-600 text-white px-4 py-1 rounded"
+                                                onClick={() => handleApproval(nurse._id, "reject-nurse")}
                                                 disabled={loading}
                                             >
                                                 Reject

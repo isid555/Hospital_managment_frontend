@@ -3,10 +3,17 @@ import { Link, useNavigate } from "react-router-dom";
 export default function Navbar() {
     const navigate = useNavigate();
     const isLoggedIn = !!localStorage.getItem("token");
+    const role = localStorage.getItem("role");
 
     const handleLogout = () => {
         localStorage.removeItem("token");
+        localStorage.removeItem("role");
         navigate("/login");
+    };
+
+    const getProfilePath = () => {
+        if (!role) return "/login";
+        return `/profile`;
     };
 
     return (
@@ -16,6 +23,8 @@ export default function Navbar() {
                 {isLoggedIn ? (
                     <>
                         <Link to="/dashboard" className="hover:underline">Dashboard</Link>
+                        <Link to={getProfilePath()} className="hover:underline">Profile</Link>
+                        <Link to="/edit-profile" className="hover:underline">Edit Profile</Link>
                         <button onClick={handleLogout} className="hover:underline">Logout</button>
                     </>
                 ) : (
