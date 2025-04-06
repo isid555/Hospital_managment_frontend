@@ -158,12 +158,12 @@ export default function PatientDashboard() {
                         Appointments with Dr. {selectedDoctor.name}
                     </h2>
 
-                    {appointments.filter(app => app.doctor._id === selectedDoctor._id).length === 0 ? (
+                    {appointments.filter(app => app.doctor && app.doctor._id === selectedDoctor._id).length === 0 ? (
                         <p className="text-gray-600">You have no appointments with this doctor yet.</p>
                     ) : (
                         <ul className="space-y-3">
                             {appointments
-                                .filter(app => app.doctor._id === selectedDoctor._id)
+                                .filter(app => app.doctor && app.doctor._id === selectedDoctor._id)
                                 .map((app) => (
                                     <li
                                         key={app._id}
