@@ -16,6 +16,7 @@ export default function Login() {
         if (res) {
             localStorage.setItem("token", res.token);
             localStorage.setItem("role" , res.role);
+            localStorage.setItem("id", res.data._id ) ;
             navigate("/dashboard");
         }
     };

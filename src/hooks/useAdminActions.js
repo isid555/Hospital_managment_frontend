@@ -86,6 +86,31 @@ export const useAdminActions = () => {
             "Nurse rejected"
         );
 
+    const removeDoctor = async (id) => {
+        try {
+            const res = await axios.delete(`http://localhost:3000/api/admin/remove-doctor/${id}`, {
+                headers: { "auth-token": localStorage.getItem("token") },
+            });
+            return res.data;
+        } catch (err) {
+            toast.error("Failed to remove doctor");
+            return null;
+        }
+    };
+
+    const removeNurse = async (id) => {
+        try {
+            const res = await axios.delete(`http://localhost:3000/api/admin/remove-nurse/${id}`, {
+                headers: { "auth-token": localStorage.getItem("token") },
+            });
+            return res.data;
+        } catch (err) {
+            toast.error("Failed to remove nurse");
+            return null;
+        }
+    };
+
+
     return {
         loading,
         getPendingDoctors,
@@ -95,6 +120,8 @@ export const useAdminActions = () => {
         approveNurse,
         rejectNurse,
         getApprovedNurses ,
-        getApprovedDoctors
+        getApprovedDoctors,
+        removeNurse,
+        removeDoctor
     };
 };
