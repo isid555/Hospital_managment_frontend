@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 
-const BASE_URL = "http://localhost:3000/api/prescription";
+const BASE_URL = "https://hospital-management-system-backend-api-1.onrender.com/api/prescription";
 
 export default function usePrescription() {
     const [loading, setLoading] = useState(false);
@@ -27,7 +27,7 @@ export default function usePrescription() {
 
     const fetchPrescriptionsByUserAndDoctor = async (userId, doctorId) => {
         const res = await axios.get(
-            `http://localhost:3000/api/prescription/by-user-doctor?userId=${userId}&doctorId=${doctorId}`,
+            `https://hospital-management-system-backend-api-1.onrender.com/api/prescription/by-user-doctor?userId=${userId}&doctorId=${doctorId}`,
             {
                 headers: {
                     "auth-token": localStorage.getItem("token"),
@@ -40,7 +40,7 @@ export default function usePrescription() {
 
     const createPrescription = async (data) => {
         try {
-            const res = await axios.post(`http://localhost:3000/api/prescription/create`, data, {
+            const res = await axios.post(`https://hospital-management-system-backend-api-1.onrender.com/api/prescription/create`, data, {
                 headers: { "auth-token": token }
             });
             toast.success("Prescription created");

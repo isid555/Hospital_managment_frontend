@@ -3,7 +3,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 
 const API = axios.create({
-    baseURL: "http://localhost:3000/api",
+    baseURL: "https://hospital-management-system-backend-api-1.onrender.com/api",
     withCredentials: true,
 });
 

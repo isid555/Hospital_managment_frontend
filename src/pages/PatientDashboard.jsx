@@ -21,7 +21,7 @@ export default function PatientDashboard() {
     useEffect(() => {
         const fetchDoctors = async () => {
             try {
-                const res = await axios.get("http://localhost:3000/api/admin/approved-doctors", {
+                const res = await axios.get("https://hospital-management-system-backend-api-1.onrender.com/api/admin/approved-doctors", {
                     headers: { "auth-token": localStorage.getItem("token") },
                 });
 
@@ -40,7 +40,7 @@ export default function PatientDashboard() {
     useEffect(() => {
         const fetchAppointments = async () => {
             try {
-                const res = await axios.get("http://localhost:3000/api/appointment/my-appointments", {
+                const res = await axios.get("https://hospital-management-system-backend-api-1.onrender.com/api/appointment/my-appointments", {
                     headers: { "auth-token": localStorage.getItem("token") },
                 });
 
@@ -63,7 +63,7 @@ export default function PatientDashboard() {
         }
         try {
             const res = await axios.get(
-                `http://localhost:3000/api/prescription/by-user-doctor?userId=${userId}&doctorId=${appointment.doctor._id}`,
+                `https://hospital-management-system-backend-api-1.onrender.com/api/prescription/by-user-doctor?userId=${userId}&doctorId=${appointment.doctor._id}`,
                 {
                     headers: {
                         "auth-token": localStorage.getItem("token"),
@@ -93,7 +93,7 @@ export default function PatientDashboard() {
 
         try {
             const res = await axios.post(
-                "http://localhost:3000/api/appointment/",
+                "https://hospital-management-system-backend-api-1.onrender.com/api/appointment/",
                 {
                     user: userId,
                     doctor: selectedDoctor._id,

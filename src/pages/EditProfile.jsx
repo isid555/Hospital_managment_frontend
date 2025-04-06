@@ -19,7 +19,7 @@ export default function EditProfile() {
     useEffect(() => {
         const fetchProfile = async () => {
             try {
-                const res = await axios.get(`http://localhost:3000/api/${role}/profile`, {
+                const res = await axios.get(`https://hospital-management-system-backend-api-1.onrender.com/api/${role}/profile`, {
                     headers: {
                         "auth-token": localStorage.getItem("token"),
                     },
@@ -75,7 +75,7 @@ export default function EditProfile() {
 
         try {
             const res = await axios.put(
-                `http://localhost:3000/api/${role}/profile`,
+                `https://hospital-management-system-backend-api-1.onrender.com/api/${role}/profile`,
                 formData,
                 {
                     headers: {

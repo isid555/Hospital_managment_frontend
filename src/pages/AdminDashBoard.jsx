@@ -109,14 +109,14 @@ export default function AdminDashboard() {
     return(
         <div>
             <div className="mt-6">
-                <h2 className="text-xl font-bold text-blue-700 mb-4">Admin Overview</h2>
+                <h2 className="text-xl font-bold text-blue-700 mb-4">Welcome to the DashBoard , Admin</h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <StatCard label="Total Doctors Approved" value={totalDoctors} color="blue" />
                     <StatCard label="Total Nurses Approved" value={totalNurses} color="green" />
                     <StatCard label="Pending Approvals" value={totalPending} color="yellow" />
                 </div>
 
-                {/* 🔽 Pending Doctors List */}
+
                 <div className="mt-8">
                     <h3 className="text-lg font-bold mb-3 text-gray-800">Pending Doctors</h3>
                     {pendingDoctors.length === 0 ? (
@@ -152,7 +152,7 @@ export default function AdminDashboard() {
                     )}
                 </div>
 
-                {/* 🔽 Pending Nurses List */}
+
                 <div className="mt-8">
                     <h3 className="text-lg font-bold mb-3 text-gray-800">Pending Nurses</h3>
                     {pendingNurses.length === 0 ? (
@@ -188,7 +188,7 @@ export default function AdminDashboard() {
                     )}
                 </div>
             </div>
-            {/* ✅ Approved Doctors */}
+
             <div className="mt-8">
                 <h3 className="text-lg font-bold mb-3 text-gray-800">Approved Doctors</h3>
                 {approvedDoctors.length === 0 ? (
@@ -215,7 +215,6 @@ export default function AdminDashboard() {
                 )}
             </div>
 
-            {/* ✅ Approved Nurses */}
             <div className="mt-8">
                 <h3 className="text-lg font-bold mb-3 text-gray-800">Approved Nurses</h3>
                 {approvedNurses.length === 0 ? (

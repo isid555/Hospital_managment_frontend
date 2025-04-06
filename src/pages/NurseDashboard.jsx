@@ -11,7 +11,7 @@ export default function NurseDashboard() {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const res = await axios.get("http://localhost:3000/api/patient", {
+                const res = await axios.get("https://hospital-management-system-backend-api-1.onrender.com/api/patient", {
                     headers: {
                         "auth-token": localStorage.getItem("token"),
                     },
@@ -36,10 +36,10 @@ export default function NurseDashboard() {
         setSelectedPatientId(patientId);
         try {
             const [appointmentsRes, prescriptionsRes] = await Promise.all([
-                axios.get(`http://localhost:3000/api/appointment/all-by-user?userId=${patientId}`, {
+                axios.get(`https://hospital-management-system-backend-api-1.onrender.com/api/appointment/all-by-user?userId=${patientId}`, {
                     headers: { "auth-token": localStorage.getItem("token") },
                 }),
-                // axios.get(`http://localhost:3000/api/prescription/by-user/${patientId}`, {
+                // axios.get(`https://hospital-management-system-backend-api-1.onrender.com/api/prescription/by-user/${patientId}`, {
                 //     headers: { "auth-token": localStorage.getItem("token") },
                 // }),
             ]);

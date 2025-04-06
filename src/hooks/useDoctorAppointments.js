@@ -10,7 +10,7 @@ const useDoctorAppointments = () => {
 
     const fetchAppointments = async () => {
         try {
-            const res = await axios.get("http://localhost:3000/api/appointment/my-appointments", {
+            const res = await axios.get("https://hospital-management-system-backend-api-1.onrender.com/api/appointment/my-appointments", {
                 headers: {
                     "auth-token": localStorage.getItem("token"),
                 },
@@ -39,7 +39,7 @@ const useDoctorAppointments = () => {
     const handleApprove = async (id) => {
         try {
             await axios.put(
-                `http://localhost:3000/api/appointment/complete/${id}`,
+                `https://hospital-management-system-backend-api-1.onrender.com/api/appointment/complete/${id}`,
                 { status: "scheduled" },
                 {
                     headers: {
@@ -57,7 +57,7 @@ const useDoctorAppointments = () => {
     const handleReject = async (id) => {
         try {
             await axios.put(
-                `http://localhost:3000/api/appointment/cancel/${id}`,
+                `https://hospital-management-system-backend-api-1.onrender.com/api/appointment/cancel/${id}`,
                 {},
                 {
                     headers: {
@@ -77,7 +77,7 @@ const useDoctorAppointments = () => {
 
         try {
             await axios.put(
-                `http://localhost:3000/api/appointment/${rescheduleData.id}`,
+                `https://hospital-management-system-backend-api-1.onrender.com/api/appointment/${rescheduleData.id}`,
                 { date: rescheduleData.date },
                 {
                     headers: {

@@ -11,7 +11,7 @@ export default function Profile() {
         const fetchProfile = async () => {
             try {
                 const token = localStorage.getItem("token");
-                const res = await axios.get(`http://localhost:3000/api/${role}/profile`, {
+                const res = await axios.get(`https://hospital-management-system-backend-api-1.onrender.com/api/${role}/profile`, {
                     headers: {
                         "auth-token": token,
                     },
