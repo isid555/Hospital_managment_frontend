@@ -6,6 +6,14 @@ module.exports = {
     theme: {
         extend: {},
     },
+    corePlugins: {
+        preflight: false, // Optional: if using custom reset
+    },
     plugins: [],
+    future: {
+        // Avoid future CSS color formats like oklch
+        hoverOnlyWhenSupported: false,
+        useOkLCH: false,
+    },
 }
 

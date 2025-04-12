@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import {backendURL} from "../../constant.js";
 
 const useDoctorAppointments = () => {
     const [appointments, setAppointments] = useState([]);
@@ -10,7 +11,7 @@ const useDoctorAppointments = () => {
 
     const fetchAppointments = async () => {
         try {
-            const res = await axios.get("https://hospital-management-system-backend-api-1.onrender.com/api/appointment/my-appointments", {
+            const res = await axios.get(`${backendURL}/appointment/my-appointments`, {
                 headers: {
                     "auth-token": localStorage.getItem("token"),
                 },
@@ -39,7 +40,7 @@ const useDoctorAppointments = () => {
     const handleApprove = async (id) => {
         try {
             await axios.put(
-                `https://hospital-management-system-backend-api-1.onrender.com/api/appointment/complete/${id}`,
+                `${backendURL}/appointment/complete/${id}`,
                 { status: "scheduled" },
                 {
                     headers: {
@@ -57,7 +58,7 @@ const useDoctorAppointments = () => {
     const handleReject = async (id) => {
         try {
             await axios.put(
-                `https://hospital-management-system-backend-api-1.onrender.com/api/appointment/cancel/${id}`,
+                `${backendURL}/appointment/cancel/${id}`,
                 {},
                 {
                     headers: {
@@ -77,7 +78,7 @@ const useDoctorAppointments = () => {
 
         try {
             await axios.put(
-                `https://hospital-management-system-backend-api-1.onrender.com/api/appointment/${rescheduleData.id}`,
+                `${backendURL}/appointment/${rescheduleData.id}`,
                 { date: rescheduleData.date },
                 {
                     headers: {

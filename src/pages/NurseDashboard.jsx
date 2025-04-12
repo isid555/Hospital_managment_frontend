@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import {backendURL} from "../../constant.js";
 
 export default function NurseDashboard() {
     const [patients, setPatients] = useState([]);
@@ -11,7 +12,7 @@ export default function NurseDashboard() {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const res = await axios.get("https://hospital-management-system-backend-api-1.onrender.com/api/patient", {
+                const res = await axios.get(`${backendURL}/patient`, {
                     headers: {
                         "auth-token": localStorage.getItem("token"),
                     },
@@ -36,7 +37,7 @@ export default function NurseDashboard() {
         setSelectedPatientId(patientId);
         try {
             const [appointmentsRes, prescriptionsRes] = await Promise.all([
-                axios.get(`https://hospital-management-system-backend-api-1.onrender.com/api/appointment/all-by-user?userId=${patientId}`, {
+                axios.get(`${backendURL}/appointment/all-by-user?userId=${patientId}`, {
                     headers: { "auth-token": localStorage.getItem("token") },
                 }),
                 // axios.get(`https://hospital-management-system-backend-api-1.onrender.com/api/prescription/by-user/${patientId}`, {

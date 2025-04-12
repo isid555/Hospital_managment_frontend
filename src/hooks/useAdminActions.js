@@ -1,9 +1,9 @@
 import { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
-
+import {backendURL} from "../../constant.js";
 const API = axios.create({
-    baseURL: "https://hospital-management-system-backend-api-1.onrender.com/api", // Same as useAuth
+    baseURL: backendURL,
     withCredentials: true,
 });
 
@@ -88,7 +88,7 @@ export const useAdminActions = () => {
 
     const removeDoctor = async (id) => {
         try {
-            const res = await axios.delete(`https://hospital-management-system-backend-api-1.onrender.com/api/admin/remove-doctor/${id}`, {
+            const res = await axios.delete(`${backendURL}/admin/remove-doctor/${id}`, {
                 headers: { "auth-token": localStorage.getItem("token") },
             });
             return res.data;
@@ -100,7 +100,7 @@ export const useAdminActions = () => {
 
     const removeNurse = async (id) => {
         try {
-            const res = await axios.delete(`https://hospital-management-system-backend-api-1.onrender.com/admin/remove-nurse/${id}`, {
+            const res = await axios.delete(`${backendURL}/admin/remove-nurse/${id}`, {
                 headers: { "auth-token": localStorage.getItem("token") },
             });
             return res.data;

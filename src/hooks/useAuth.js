@@ -1,9 +1,10 @@
 import { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import {backendURL} from "../../constant.js";
 
 const API = axios.create({
-    baseURL: "https://hospital-management-system-backend-api-1.onrender.com/api",
+    baseURL: backendURL,
     withCredentials: true,
 });
 

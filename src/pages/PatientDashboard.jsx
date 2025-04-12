@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import PrescriptionViewModal from "../components/PrescriptionViewModal";
+import {backendURL} from "../../constant.js";
 
 
 export default function PatientDashboard() {
@@ -21,7 +22,7 @@ export default function PatientDashboard() {
     useEffect(() => {
         const fetchDoctors = async () => {
             try {
-                const res = await axios.get("https://hospital-management-system-backend-api-1.onrender.com/api/admin/approved-doctors", {
+                const res = await axios.get(`${backendURL}/admin/approved-doctors`, {
                     headers: { "auth-token": localStorage.getItem("token") },
                 });
 
@@ -40,7 +41,7 @@ export default function PatientDashboard() {
     useEffect(() => {
         const fetchAppointments = async () => {
             try {
-                const res = await axios.get("https://hospital-management-system-backend-api-1.onrender.com/api/appointment/my-appointments", {
+                const res = await axios.get(`${backendURL}/appointment/my-appointments`, {
                     headers: { "auth-token": localStorage.getItem("token") },
                 });
 
@@ -63,7 +64,7 @@ export default function PatientDashboard() {
         }
         try {
             const res = await axios.get(
-                `https://hospital-management-system-backend-api-1.onrender.com/api/prescription/by-user-doctor?userId=${userId}&doctorId=${appointment.doctor._id}`,
+                `${backendURL}/prescription/by-user-doctor?userId=${userId}&doctorId=${appointment.doctor._id}`,
                 {
                     headers: {
                         "auth-token": localStorage.getItem("token"),
@@ -93,7 +94,7 @@ export default function PatientDashboard() {
 
         try {
             const res = await axios.post(
-                "https://hospital-management-system-backend-api-1.onrender.com/api/appointment/",
+                `${backendURL}/appointment/`,
                 {
                     user: userId,
                     doctor: selectedDoctor._id,
